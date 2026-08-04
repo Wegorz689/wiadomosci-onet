@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portal Informacyjny</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --yellow:#FFCC00;
+    --bg:#F5F5F5;
+    --white:#fff;
+    --text:#111;
+    --gray:#666;
+    --dark:#222;
+    --border:#e4e4e4;
+    --red:#C62828;
+}
+
+body{
+    font-family:Inter,Arial,Helvetica,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.45;
+}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+img{
+    width:100%;
+    display:block;
+    transition:.35s;
+}
+
+.wrapper{
+    max-width:1200px;
+    margin:auto;
+    background:#fff;
+    min-height:100vh;
+}
+
+/* TOP BAR */
+
+.topbar{
+    background:#222;
+    color:#fff;
+    padding:10px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-size:.9rem;
+}
+
+.top-links{
+    display:flex;
+    gap:22px;
+}
+
+.top-links a:hover{
+    color:var(--yellow);
+}
+
+.clock{
+    color:#ddd;
+}
+
+/* HEADER */
+
+.header{
+    padding:22px;
+    border-bottom:1px solid var(--border);
+}
+
+.logo-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+.logo-box{
+    background:var(--yellow);
+    color:#000;
+    font-size:38px;
+    font-weight:900;
+    text-transform:lowercase;
+    padding:12px 18px;
+    border-radius:5px;
+    letter-spacing:-2px;
+}
+
+.logo-title{
+    font-size:34px;
+    font-weight:800;
+    letter-spacing:1px;
+}
+
+/* NAV */
+
+.mainnav{
+    margin-top:20px;
+    display:flex;
+    gap:25px;
+    border-top:1px solid var(--border);
+    padding-top:15px;
+}
+
+.mainnav a{
+    font-weight:600;
+    position:relative;
+}
+
+.mainnav a:hover{
+    color:#000;
+}
+
+.mainnav a::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-6px;
+    width:0;
+    height:3px;
+    background:var(--yellow);
+    transition:.3s;
+}
+
+.mainnav a:hover::after{
+    width:100%;
+}
+
+/* Hamburger */
+
+.hamburger{
+    display:none;
+    font-size:30px;
+    cursor:pointer;
+}
+
+/* GRID */
+
+.main{
+    display:grid;
+    grid-template-columns:2fr 1fr .8fr;
+    gap:30px;
+    padding:25px;
+}
+
+/* CARDS */
+
+.card{
+    border-bottom:1px solid var(--border);
+    padding-bottom:18px;
+    margin-bottom:18px;
+}
+
+.tag{
+    display:inline-block;
+    background:#000;
+    color:#fff;
+    font-size:.72rem;
+    padding:4px 8px;
+    margin-bottom:10px;
+    font-weight:bold;
+    border-radius:2px;
+}
+
+.tag.red{
+    background:var(--red);
+}
+
+.hero{
+    overflow:hidden;
+}
+
+.hero img{
+    border-radius:6px;
+}
+
+.hero:hover img{
+    transform:scale(1.04);
+}
+
+.hero h1{
+    font-size:2rem;
+    margin:15px 0;
+}
+
+.hero p{
+    color:#444;
+}
+
+.article{
+    display:flex;
+    gap:14px;
+    margin-bottom:18px;
+    cursor:pointer;
+}
+
+.article-image{
+    flex:0 0 130px;
+    overflow:hidden;
+    border-radius:5px;
+}
+
+.article:hover img{
+    transform:scale(1.08);
+}
+
+.article:hover h3{
+    color:#000;
+}
+
+.article h3{
+    font-size:1.05rem;
+    transition:.2s;
+}
+
+.article p{
+    color:#666;
+    font-size:.9rem;
+    margin-top:5px;
+}
+
+/* CENTER */
+
+.section-title{
+    font-size:1.4rem;
+    margin-bottom:18px;
+}
+
+.latest-item{
+    padding:15px 0;
+    border-bottom:1px solid var(--border);
+}
+
+.time{
+    color:#666;
+    font-size:.85rem;
+    font-weight:bold;
+}
+
+.latest-item:hover{
+    background:#fafafa;
+    padding-left:8px;
+    transition:.2s;
+}
+
+/* RIGHT */
+
+.sidebar-box{
+    border:1px solid var(--border);
+    margin-bottom:20px;
+    padding:18px;
+    border-radius:6px;
+}
+
+.sidebar-box h3{
+    margin-bottom:12px;
+}
+
+.popular li{
+    margin-bottom:12px;
+}
+
+.popular li:hover{
+    color:#000;
+    cursor:pointer;
+}
+
+.ad{
+    height:250px;
+    background:#ececec;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:#777;
+    font-size:1.1rem;
+    border:2px dashed #bbb;
+}
+
+.weather{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-size:1rem;
+}
+
+footer{
+    text-align:center;
+    padding:30px;
+    color:#666;
+    border-top:1px solid var(--border);
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+.main{
+    grid-template-columns:1fr;
+}
+
+.logo-row{
+    align-items:flex-start;
+}
+
+.hamburger{
+    display:block;
+}
+
+.mainnav{
+    display:none;
+    flex-direction:column;
+    gap:14px;
+}
+
+.mainnav.show{
+    display:flex;
+}
+
+.top-links{
+    display:none;
+}
+
+.hero h1{
+    font-size:1.6rem;
+}
+
+.article{
+    flex-direction:column;
+}
+
+.article-image{
+    flex:auto;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="wrapper">
+
+<div class="topbar">
+
+<div class="top-links">
+<a href="#">Sport</a>
+<a href="#">Biznes</a>
+<a href="#">Kultura</a>
+<a href="#">Technologie</a>
+<a href="#">Moto</a>
+</div>
+
+<div class="clock" id="clock"></div>
+
+</div>
+
+<header class="header">
+
+<div class="logo-row">
+
+<div class="logo">
+<div class="logo-box">onet</div>
+<div class="logo-title">WIADOMOŚCI</div>
+</div>
+
+<div class="hamburger" id="hamburger">
+☰
+</div>
+
+</div>
+
+<nav class="mainnav" id="menu">
+<a href="#">Strona główna</a>
+<a href="#">Kraj</a>
+<a href="#">Świat</a>
+<a href="#">Polityka</a>
+<a href="#">Gospodarka</a>
+<a href="#">Opinie</a>
+<a href="#">Nauka</a>
+</nav>
+
+</header>
+
+<main class="main">
+
+<!-- LEFT -->
+
+<section>
+
+<div class="card hero">
+
+<div class="tag red">TYLKO W SERWISIE</div>
+
+<img src="https://picsum.photos/900/520?random=11">
+
+<h1>Rząd przedstawia nowy pakiet inwestycji infrastrukturalnych wart miliardy złotych</h1>
+
+<p>
+Nowy program obejmuje modernizację kolei, dróg oraz inwestycje energetyczne.
+Eksperci wskazują, że projekt może znacząco wpłynąć na rozwój regionów i rynek pracy.
+</p>
+
+</div>
+
+<div class="article">
+
+<div class="article-image">
+<img src="https://picsum.photos/260/180?random=2">
+</div>
+
+<div>
+<div class="tag">KRAJ</div>
+<h3>Samorządy otrzymają dodatkowe środki na modernizację szkół</h3>
+<p>Program ma objąć ponad 400 placówek w całej Polsce.</p>
+</div>
+
+</div>
+
+<div class="article">
+
+<div class="article-image">
+<img src="https://picsum.photos/260/180?random=3">
+</div>
+
+<div>
+<div class="tag red">ŚWIAT</div>
+<h3>Europejscy przywódcy spotkali się na nadzwyczajnym szczycie</h3>
+<p>Tematem rozmów były bezpieczeństwo oraz współpraca gospodarcza.</p>
+</div>
+
+</div>
+
+<div class="article">
+
+<div class="article-image">
+<img src="https://picsum.photos/260/180?random=4">
+</div>
+
+<div>
+<div class="tag">GOSPODARKA</div>
+<h3>Notowania giełdowe zakończyły dzień umiarkowanymi wzrostami</h3>
+<p>Analitycy zwracają uwagę na poprawę nastrojów inwestorów.</p>
+</div>
+
+</div>
+
+<div class="article">
+
+<div class="article-image">
+<img src="https://picsum.photos/260/180?random=5">
+</div>
+
+<div>
+<div class="tag red">TECH</div>
+<h3>Nowe technologie AI coraz mocniej wspierają przedsiębiorstwa</h3>
+<p>Firmy inwestują w automatyzację i cyfryzację procesów.</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- CENTER -->
+
+<section>
+
+<h2 class="section-title">Najnowsze</h2>
+
+<div class="latest-item">
+<div class="time">14:45</div>
+<p>Premier zapowiada kolejne konsultacje społeczne.</p>
+</div>
+
+<div class="latest-item">
+<div class="time">14:20</div>
+<p>Inflacja pozostaje pod kontrolą według najnowszych danych.</p>
+</div>
+
+<div class="latest-item">
+<div class="time">13:58</div>
+<p>Polska reprezentacja rozpoczyna przygotowania do turnieju.</p>
+</div>
+
+<div class="latest-item">
+<div class="time">13:40</div>
+<p>Eksperci ostrzegają przed falą upałów w Europie.</p>
+</div>
+
+<div class="latest-item">
+<div class="time">13:05</div>
+<p>Rosną inwestycje w odnawialne źródła energii.</p>
+</div>
+
+<div class="latest-item">
+<div class="time">12:37</div>
+<p>Bank centralny pozostawił stopy procentowe bez zmian.</p>
+</div>
+
+<div class="latest-item">
+<div class="time">12:12</div>
+<p>Nowe połączenia kolejowe mają ruszyć jesienią.</p>
+</div>
+
+</section>
+
+<!-- RIGHT -->
+
+<aside>
+
+<div class="sidebar-box">
+
+<h3>Popularne</h3>
+
+<ul class="popular">
+<li>Najczęściej czytane wiadomości dnia</li>
+<li>Nowe prognozy dla gospodarki</li>
+<li>Jak zmieniają się ceny mieszkań?</li>
+<li>Eksperci komentują sytuację na świecie</li>
+<li>Ranking największych inwestycji</li>
+</ul>
+
+</div>
+
+<div class="sidebar-box ad">
+REKLAMA
+</div>
+
+<div class="sidebar-box">
+
+<h3>Pogoda</h3>
+
+<div class="weather">
+<div>
+<strong>Warszawa</strong><br>
+22°C<br>
+Słonecznie
+</div>
+
+<div style="font-size:48px;">☀️</div>
+
+</div>
+
+</div>
+
+<div class="sidebar-box">
+
+<h3>Giełda</h3>
+
+<p>WIG20: <strong style="color:green;">+0,84%</strong></p>
+<p>EUR: 4,29 PLN</p>
+<p>USD: 3,94 PLN</p>
+
+</div>
+
+</aside>
+
+</main>
+
+<footer>
+© 2026 Portal Informacyjny — projekt demonstracyjny.
+</footer>
+
+</div>
+
+<script>
+const clock=document.getElementById("clock");
+
+function updateClock(){
+
+const now=new Date();
+
+const options={
+weekday:'long',
+year:'numeric',
+month:'long',
+day:'numeric'
+};
+
+const date=now.toLocaleDateString('pl-PL',options);
+
+const time=now.toLocaleTimeString('pl-PL');
+
+clock.textContent=date+" • "+time;
+
+}
+
+updateClock();
+setInterval(updateClock,1000);
+
+const hamburger=document.getElementById("hamburger");
+const menu=document.getElementById("menu");
+
+hamburger.addEventListener("click",()=>{
+menu.classList.toggle("show");
+});
+</script>
+
+</body>
+</html>
